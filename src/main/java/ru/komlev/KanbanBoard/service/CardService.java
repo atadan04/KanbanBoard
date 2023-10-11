@@ -12,18 +12,22 @@ import java.util.UUID;
 public class CardService {
 
     private CardRepository repository;
+
     @Autowired
     public CardService(CardRepository repository) {
         this.repository = repository;
     }
-    public Card add(Card card){
+
+    public Card add(Card card) {
         return repository.save(card);
 
     }
-    public List<Card> findAll(){
-       return repository.findAll();
+
+    public List<Card> findAll() {
+        return repository.findAll();
     }
-    public void deleteById(UUID id){
-         repository.deleteById(id);
+
+    public void deleteById(UUID id) {
+        repository.deleteById(id);
     }
 }
