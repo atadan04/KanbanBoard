@@ -1,7 +1,7 @@
 package ru.komlev.KanbanBoard.transformer;
 
-public interface Transformer<T, V> {
+public interface Transformer<T, V, K> {
     V transformTo(T t);
 
-    T transformFrom(V v);
+    K transformFrom(V v);
 }

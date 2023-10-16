@@ -10,17 +10,18 @@ import java.util.List;
 import java.util.UUID;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "status")
+@Table(name = "type")
 @Builder
-public class Status {
+public class Type {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String name;
-    @ManyToMany(mappedBy = "statuses")
+
+    @ManyToMany(mappedBy = "types")
     private List<Board> boards;
 
 }

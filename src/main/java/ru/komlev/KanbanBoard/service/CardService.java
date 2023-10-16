@@ -1,6 +1,6 @@
 package ru.komlev.KanbanBoard.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.komlev.KanbanBoard.entity.Card;
 import ru.komlev.KanbanBoard.repository.CardRepository;
@@ -9,14 +9,10 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class CardService {
 
-    private CardRepository repository;
-
-    @Autowired
-    public CardService(CardRepository repository) {
-        this.repository = repository;
-    }
+    private final CardRepository repository;
 
     public Card add(Card card) {
         return repository.save(card);
@@ -25,6 +21,10 @@ public class CardService {
 
     public List<Card> findAll() {
         return repository.findAll();
+    }
+
+    public Card findById(UUID id) {
+        return repository.findById(id).orElse(null);
     }
 
     public void deleteById(UUID id) {

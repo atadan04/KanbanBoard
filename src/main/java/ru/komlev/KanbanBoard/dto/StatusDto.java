@@ -1,14 +1,13 @@
 package ru.komlev.KanbanBoard.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.UUID;
-
 @Data
-public class RequestCard {
+@Builder
+public class StatusDto {
     private UUID id;
-    private String title;
-    private UUID statusId;
+    private String name;
     private UUID boardId;
-
 }

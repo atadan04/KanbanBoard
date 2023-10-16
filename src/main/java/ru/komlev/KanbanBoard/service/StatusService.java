@@ -1,7 +1,8 @@
 package ru.komlev.KanbanBoard.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.komlev.KanbanBoard.entity.Board;
 import ru.komlev.KanbanBoard.entity.Status;
 import ru.komlev.KanbanBoard.repository.StatusRepository;
 
@@ -9,16 +10,15 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class StatusService {
-    private StatusRepository repository;
+    private final StatusRepository repository;
 
-    @Autowired
-    public StatusService(StatusRepository repository) {
-        this.repository = repository;
-    }
 
     public Status add(Status status) {
+
         return repository.save(status);
+
     }
 
     public List<Status> findAll() {
@@ -33,4 +33,7 @@ public class StatusService {
         repository.deleteById(id);
     }
 
+    public List<Status> findByBoard(Board board) {
+        return repository.findByBoards(board);
+    }
 }

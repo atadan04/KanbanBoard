@@ -2,28 +2,25 @@ package ru.komlev.KanbanBoard.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "user_kanban")
-public class User {
+@Table(name = "priority")
+@Builder
+public class Priority {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private String login;
-    private String password;
-    private LocalDate birthday;
-    private String email;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_kanban_id")
+    private String name;
+    @ManyToMany(mappedBy = "priorities")
     private List<Board> boards;
 
 
