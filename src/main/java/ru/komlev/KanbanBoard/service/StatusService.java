@@ -26,7 +26,7 @@ public class StatusService {
     }
 
     public Status findById(UUID id) {
-        return repository.findById(id).orElse(null);
+        return id != null ? repository.findById(id).orElse(null) : null;
     }
 
     public void deleteById(UUID id) {

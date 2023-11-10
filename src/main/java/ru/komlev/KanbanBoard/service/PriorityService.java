@@ -23,7 +23,7 @@ public class PriorityService {
     }
 
     public Priority findById(UUID id) {
-        return repository.findById(id).orElse(null);
+        return id != null ? repository.findById(id).orElse(null) : null;
     }
 
     public List<Priority> findByBoard(Board board) {

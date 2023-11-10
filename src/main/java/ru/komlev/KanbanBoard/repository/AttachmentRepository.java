@@ -7,8 +7,7 @@ import ru.komlev.KanbanBoard.entity.Card;
 
 import java.util.List;
 import java.util.UUID;
-
 @Repository
-public interface CardRepository extends JpaRepository<Card, UUID> {
-    List<Card> findByAttachments(Attachment attachment);
+public interface AttachmentRepository extends JpaRepository<Attachment, UUID> {
+    List<Attachment> findByCards(Card card);
 }

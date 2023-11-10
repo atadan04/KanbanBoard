@@ -1,16 +1,16 @@
 package ru.komlev.KanbanBoard.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
-import ru.komlev.KanbanBoard.entity.Board;
 
-import java.util.List;
 import java.util.UUID;
 
 @Data
 @Builder
 public class PriorityDto {
     private UUID id;
+    @NotBlank
     private String name;
-    private List<Board> boards;
+    private UUID boardId;
 }

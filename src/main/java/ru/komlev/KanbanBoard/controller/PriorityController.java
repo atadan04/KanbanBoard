@@ -1,5 +1,6 @@
 package ru.komlev.KanbanBoard.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,9 +32,12 @@ public class PriorityController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<PriorityDto> add(PriorityDto priorityDto) {
-        Priority priority = priorityService.add(priorityTransformer.transformTo(priorityDto));
-        return ResponseEntity.ok(priorityTransformer.transformFrom(priority));
+    public ResponseEntity<PriorityDto> add(@Valid @RequestBody PriorityDto requestPriorityDto) {
+        Priority priority = priorityService.add(priorityTransformer.transformTo(requestPriorityDto));
+        PriorityDto responsePriorityDto = priorityTransformer.transformFrom(priority);
+        responsePriorityDto.setBoardId(requestPriorityDto.getBoardId());
+
+        return ResponseEntity.ok(responsePriorityDto);
     }
 
     @DeleteMapping("/{id}")

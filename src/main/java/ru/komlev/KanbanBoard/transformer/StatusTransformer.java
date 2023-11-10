@@ -18,12 +18,15 @@ public class StatusTransformer implements Transformer<StatusDto, Status, StatusD
     @Override
     public Status transformTo(StatusDto requestStatus) {
         Board board = boardService.findById(requestStatus.getBoardId());
-
+        List<Status> statusesCurrentBoard = board.getStatuses();
         Status status = Status.builder()
                 .id(requestStatus.getId())
                 .name(requestStatus.getName())
-                .boards(List.of(board)).build();
-        board.setStatuses(List.of(status));
+                .boards(List.of(board))
+                .build();
+        statusesCurrentBoard.add(status);
+        board.setStatuses(statusesCurrentBoard);
+
         return status;
     }
 

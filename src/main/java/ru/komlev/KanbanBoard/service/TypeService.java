@@ -23,7 +23,7 @@ public class TypeService {
     }
 
     public Type findById(UUID id) {
-        return repository.findById(id).orElse(null);
+        return id != null ? repository.findById(id).orElse(null) : null;
     }
 
     public List<Type> findByBoard(Board board) {

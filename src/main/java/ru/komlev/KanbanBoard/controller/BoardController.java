@@ -1,12 +1,15 @@
 package ru.komlev.KanbanBoard.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.komlev.KanbanBoard.dto.RequestBoardDto;
 import ru.komlev.KanbanBoard.dto.ResponseBoardDto;
 import ru.komlev.KanbanBoard.entity.Board;
-import ru.komlev.KanbanBoard.exceptionHandling.NoSuchBoardException;
+import ru.komlev.KanbanBoard.exception.NoSuchBoardException;
 import ru.komlev.KanbanBoard.service.BoardService;
 import ru.komlev.KanbanBoard.transformer.BoardTransformer;
 
@@ -40,7 +43,7 @@ public class BoardController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<ResponseBoardDto> add(RequestBoardDto requestBoardDto) {
+    public ResponseEntity<ResponseBoardDto> add(@Valid @RequestBody RequestBoardDto requestBoardDto) {
         Board board = boardService.insert(boardTransformer.transformTo(requestBoardDto));
         return ResponseEntity.ok(boardTransformer.transformFrom(board));
     }

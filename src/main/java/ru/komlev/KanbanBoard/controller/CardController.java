@@ -5,16 +5,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.komlev.KanbanBoard.dto.CardDto;
 import ru.komlev.KanbanBoard.entity.Card;
-import ru.komlev.KanbanBoard.exceptionHandling.NoSuchCardException;
+import ru.komlev.KanbanBoard.exception.NoSuchCardException;
 import ru.komlev.KanbanBoard.service.CardService;
-import ru.komlev.KanbanBoard.transformer.CardTransformer;
 import ru.komlev.KanbanBoard.transformer.Transformer;
 
 import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/tasks")
+@RequestMapping("/api/cards")
 @RequiredArgsConstructor
 public class CardController {
     private final CardService cardService;
@@ -41,7 +40,7 @@ public class CardController {
     @PostMapping("/")
     public ResponseEntity<CardDto> insert(@RequestBody CardDto requestCard) {
         Card card = cardTransformer.transformTo(requestCard);
-        cardService.add(card);
+        cardService.save(card);
         return ResponseEntity.ok(cardTransformer.transformFrom(card));
     }
 

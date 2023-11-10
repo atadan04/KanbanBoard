@@ -19,22 +19,18 @@ public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-//    @ManyToMany
-//    @JoinTable(
-//            name = "board_cards",
-//            joinColumns = @JoinColumn(name = "cards_id"),
-//            inverseJoinColumns = @JoinColumn(name = "board_id")
-//    )
-    @OneToMany(mappedBy = "board")
+    @Column(unique = true, nullable = false)
+    private String name;
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Card> cards;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "board_status",
             joinColumns = @JoinColumn(name = "status_id"),
             inverseJoinColumns = @JoinColumn(name = "board_id"))
     private List<Status> statuses;
-
-    @ManyToMany()
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "board_type",
             joinColumns = @JoinColumn(name = "type_id"),
@@ -42,7 +38,7 @@ public class Board {
     )
     private List<Type> types;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "board_priority",
             joinColumns = @JoinColumn(name = "priority_id"),

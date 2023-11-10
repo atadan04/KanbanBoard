@@ -2,6 +2,7 @@ package ru.komlev.KanbanBoard.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.komlev.KanbanBoard.entity.Attachment;
 import ru.komlev.KanbanBoard.entity.Card;
 import ru.komlev.KanbanBoard.repository.CardRepository;
 
@@ -14,7 +15,7 @@ public class CardService {
 
     private final CardRepository repository;
 
-    public Card add(Card card) {
+    public Card save(Card card) {
         return repository.save(card);
 
     }
@@ -24,10 +25,15 @@ public class CardService {
     }
 
     public Card findById(UUID id) {
-        return repository.findById(id).orElse(null);
+        return id != null ? repository.findById(id).orElse(null) : null;
+
     }
 
     public void deleteById(UUID id) {
         repository.deleteById(id);
+    }
+
+    public List<Card> findByAttachments(Attachment attachment) {
+        return repository.findByAttachments(attachment);
     }
 }

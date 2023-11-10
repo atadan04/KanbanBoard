@@ -1,0 +1,1 @@
+--insert into board (id,user_kanban_id) values ('4b2b9354-6dee-11ee-b962-0242ac120002',null);

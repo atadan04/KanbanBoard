@@ -1,5 +1,6 @@
 package ru.komlev.KanbanBoard.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class StatusController {
     private final BoardService boardService;
 
     @PostMapping("/")
-    public ResponseEntity<StatusDto> add(@RequestBody StatusDto requestStatus) {
+    public ResponseEntity<StatusDto> add(@Valid @RequestBody StatusDto requestStatus) {
         Status status = statusTransformer.transformTo(requestStatus);
         status = statusService.add(status);
         StatusDto responseStatus = statusTransformer.transformFrom(status);

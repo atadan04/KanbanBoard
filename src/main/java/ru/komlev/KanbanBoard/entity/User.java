@@ -22,9 +22,10 @@ public class User {
     private String password;
     private LocalDate birthday;
     private String email;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "user_kanban_id")
     private List<Board> boards;
+
 
 
 }

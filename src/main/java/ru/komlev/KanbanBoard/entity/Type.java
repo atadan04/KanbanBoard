@@ -1,5 +1,6 @@
 package ru.komlev.KanbanBoard.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,8 +21,8 @@ public class Type {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String name;
-
-    @ManyToMany(mappedBy = "types")
+    @JsonIgnore
+    @ManyToMany(mappedBy = "types", fetch = FetchType.LAZY)
     private List<Board> boards;
 
 }
